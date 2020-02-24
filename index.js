@@ -3,6 +3,10 @@ const app = express();
 const bodyParset = require('body-parser');
 const connection = require("./database/database");
 
+//importando controllers
+const categoriesController = require('./categories/CategoriesContoller');
+const articlesController = require('./articles/ArticlesContoller');
+
 
 //view engine
 app.set('view engine', 'ejs');
@@ -25,6 +29,13 @@ connection
     .catch((error)=> {
         console.log(error);
     })
+
+//chamando rotas da controller categorias
+//a barra representa o prefixo para acessar a rota
+app.use("/",categoriesController);
+
+//chamando rota da controller articles
+app.use('/',articlesController);
 
 app.get('/', (req, resp) => {
     resp.render("index");
