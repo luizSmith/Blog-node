@@ -19,6 +19,10 @@ app.use(express.static('public'));
 app.use(bodyParset.urlencoded({extended: false}));
 app.use(bodyParset.json());
 
+//Model
+const Article = require('./articles/Article');
+const Category = require('./categories/Category');
+
 //database
 
 connection
