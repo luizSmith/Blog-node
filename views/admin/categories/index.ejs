@@ -3,7 +3,8 @@
 <%- include("../../partials/navbar.ejs") %>
     <div class="container">
         <hr>
-        <h2 class="mb-4">Categorias</h2>
+        <h2 class="mb-3">Categorias</h2>
+        <a class="btn btn-success mb-3" href="/admin/categories/new">Criar Categoria</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -19,11 +20,27 @@
                     <td><%= categoria.id %></td>
                     <td><%= categoria.title %></td>
                     <td><%= categoria.slug %></td>
-                    <td></td>
+                    <td>
+                        <button class="btn btn-warning">Editar</button>
+                        <form id="deletar" method="POST" action="/categories/delete" style="display: inline;">
+                            <input type="hidden" name="id" value="<%= categoria.id %>">
+                            <button type="submit" class="btn btn-danger">Excluir</button>
+                        </form>
+                    </td>
                 </tr>
-                <% }) %>
+                <% }); %>
             </tbody>
         </table>
     </div>
 </body>
 <%- include("../../partials/footer.ejs") %>
+<script>
+    $("#deletar").submit(function(e) {    
+        
+        var confirma = confirm("Você realmente deseja apagar esta caregoria ?");
+        
+        if (!confirma) {
+            e.preventDefault();
+        }
+    })
+</script>
