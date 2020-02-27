@@ -14,7 +14,7 @@ router.get('/admin/categories/new', (req, resp) => {
 router.post("/categories/save", (req,resp) => {
     var title = req.body.title;
     if (title != undefined) {
-
+        //INSERT INTO category
         Category.create({
             title: title,
             // npm install --save slugify
@@ -31,6 +31,7 @@ router.post("/categories/save", (req,resp) => {
 
 //lista categoria
 router.get("/admin/categories", (req, resp) => {
+    // efetua um "SELECT * FROM category"
     Category.findAll({
         raw: true,
         order: [
@@ -46,8 +47,10 @@ router.get("/admin/categories", (req, resp) => {
 //deleta categoria
 router.post('/categories/delete', (req,resp) => {
     var id = req.body.id;
-
+    //isNaN verifica se o valor é um numero ilegal
     if (id != undefined && !isNaN(id)) { // se não for null && se não for um numero
+            //Apaga o registro determinado
+            // DELETE FROM Category WHERE id = :id
             Category.destroy({
                 where:{
                     id: id
@@ -64,7 +67,8 @@ router.get("/admin/categories/edit/:id", (req,resp) => {
     var id = req.params.id;
 
     if (id != undefined && !isNaN(id)) {
-
+        // Encontra o registro determinado
+        // SELECT * FROM Category WHERE  id = :id
         Category.findByPk(id).then(category => {
         
             resp.render('admin/categories/edit',{
@@ -86,6 +90,8 @@ router.post("/categories/update", (req, resp) => {
     var title = req.body.title;
 
     if (id != undefined && !isNaN(id)) {
+        //Atualiza o registro determinado
+        //UPDATE category SET ...
         Category.update({
             title: title,
             slug: slugify(title)
