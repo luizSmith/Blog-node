@@ -5,7 +5,7 @@
         <hr>
         <div class="card">
             <div class="card-header">
-                <h2>Cadastro de artigos</h2>
+                <h2>Editar de artigos</h2>
             </div>
             <div class="card-body">
                 <form method="POST" action="/articles/save">
@@ -15,9 +15,8 @@
                         <option value="<%= category.id %>"><%= category.title %></option>
                         <% }) %>
                     </select>
-                    <textarea class="form-control" name="body" id="article"></textarea>
-                    <br>
-                    <button class="btn btn-success">Cadastrar</button>
+                    <textarea class="form-control mb-3" name="body"></textarea>
+                    <button class="btn btn-success">Editar</button>
                     <a href="/admin/articles" class="btn btn-danger">Cancelar</a>
                 </form>
             </div>
