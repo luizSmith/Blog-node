@@ -42,7 +42,32 @@ app.use("/",categoriesController);
 app.use('/',articlesController);
 
 app.get('/', (req, resp) => {
-    resp.render("index");
+
+    Article.findAll().then(articles => {
+        resp.render("index",{
+            articles:articles
+        });
+    });
+    
+});
+
+app.get('/:slug',(req, resp) => {
+    var slug = req.params.slug;
+    Article.findAll({
+        where:{
+            slug:slug
+        }
+    }).then(article => {
+        if (article != undefined) {
+            resp.render('article',{
+                article:article
+            });
+        } else {
+            resp.redirect('/')
+        }
+    }).catch(erro => {
+        resp.redirect("/");
+    })
 });
 
 app.listen(8080, () => {
