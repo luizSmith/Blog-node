@@ -1,0 +1,7 @@
+.jumbotron {
+    background-image: url('/img/header_artigos.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    color: white;
+    border-radius: 0px;
+}
