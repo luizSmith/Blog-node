@@ -43,7 +43,11 @@ app.use('/',articlesController);
 
 app.get('/', (req, resp) => {
 
-    Article.findAll().then(articles => {
+    Article.findAll({
+        order:[
+            ['id','DESC']
+        ]
+    }).then(articles => {
         resp.render("index",{
             articles:articles
         });
@@ -53,7 +57,7 @@ app.get('/', (req, resp) => {
 
 app.get('/:slug',(req, resp) => {
     var slug = req.params.slug;
-    Article.findAll({
+    Article.findOne({
         where:{
             slug:slug
         }
