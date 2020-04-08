@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <form method="POST" action="/articles/save">
-                    <input class="form-control mb-3" name="title" placeholder="Titulo categoria">
+                    <input class="form-control mb-3" name="title" placeholder="Titulo Artigo">
                     <select class="form-control mb-3" name="category">
                         <% categories.forEach(category => { %>
                         <option value="<%= category.id %>"><%= category.title %></option>

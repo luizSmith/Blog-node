@@ -67,15 +67,20 @@ router.post('/articles/delete', (req,resp) => {
     }
 });
 
-router.get('/admin/articles/edit/:edit', (req,resp) => {
+router.get('/admin/articles/edit/:id', (req,resp) => {
     var id = req.params.id;
 
     if (id != undefined && !isNaN(id)) {
 
         Article.findByPk(id).then(article => {
-        
-            resp.render('admin/categories/edit',{
-                article:article
+
+            Category.findAll().then(categories => {
+
+                resp.render('admin/articles/edit',{
+                    article:article,
+                    categories:categories
+                });
+
             });
     
         }).catch(erro => {
@@ -86,6 +91,30 @@ router.get('/admin/articles/edit/:edit', (req,resp) => {
         resp.redirect("/admin/articles");
     }
 
+});
+
+router.post("/articles/update", (req, resp) => {
+    var id = req.body.id;
+    var title = req.body.title;
+    var category = req.body.category;
+    var body = req.body.body;
+
+    if (id != undefined && !isNaN(id)) {
+        Article.update({
+            title:title,
+            slug: slugify(title),
+            tbCategoryId: category,
+            body:body
+        },{
+            where: {
+                id: id
+            }
+        }).then(() => {
+            resp.redirect("/admin/articles");
+        })
+    } else {
+        resp.redirect("/admin/articles");
+    }
 });
 
 module.exports = router;
