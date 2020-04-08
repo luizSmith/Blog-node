@@ -105,7 +105,5 @@ router.post("/categories/update", (req, resp) => {
     } else {
         resp.redirect("/admin/categories");
     }
-
 })
-
 module.exports = router;

@@ -48,9 +48,12 @@ app.get('/', (req, resp) => {
             ['id','DESC']
         ]
     }).then(articles => {
-        resp.render("index",{
-            articles:articles
-        });
+        Category.findAll().then(categories => {
+            resp.render("index",{
+                articles:articles,
+                categories:categories
+            });
+        })        
     });
     
 });
@@ -63,9 +66,40 @@ app.get('/:slug',(req, resp) => {
         }
     }).then(article => {
         if (article != undefined) {
-            resp.render('article',{
-                article:article
-            });
+            Category.findAll().then(categories => {
+                resp.render("article",{
+                    article:article,
+                    categories:categories
+                });
+            });  
+        } else {
+            resp.redirect('/')
+        }
+    }).catch(erro => {
+        resp.redirect("/");
+    })
+});
+
+app.get('/category/:slug',(req, resp) => {
+    var slug = req.params.slug;
+    Category.findOne({
+        where:{
+            slug:slug
+        },
+        include: [{
+            model: Article
+        }]
+    }).then(category => {
+        if (category != undefined) {
+
+            Category.findAll().then(categories => {
+                resp.render("index",{
+                    
+                    articles:category.tb_articles,
+                    categories:categories //nav bar
+                })
+            })
+            
         } else {
             resp.redirect('/')
         }
