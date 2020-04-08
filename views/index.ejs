@@ -1,21 +1,31 @@
 <%- include("partials/header.ejs") %>
+
 <body>
+    <style>
+        .jumbotron {
+            background-image: url('/img/header_artigos.jpg'); 
+            background-size: 100%; 
+            background-repeat: no-repeat;
+            color: white; 
+            border-radius: 0px;
+        }        
+    </style>
     <%- include("partials/homenavbar.ejs") %>
-    <div class="jumbotron" style="background-image: url('/img/header_artigos.jpg'); color: white; border-radius: 0px;">
-        <h3 class="display-4">Artigos</h3>
-        <p class="lead">Seja feliz sempre . . .</p>
+    <div class="jumbotron">
+        <h3 class="display-4">Bem vindo</h3>
+        <p class="lead">Procure novos artigos</p>
     </div>
     <div class="container">
 
         <% articles.forEach(article => { %>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h3><%= article.title %></h3>
-                </div>
-                <div class="card-body">
-                    <a href="/<%= article.slug %>" class="btn btn-success">Ler artigo</a>
-                </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3><%= article.title %></h3>
             </div>
+            <div class="card-body">
+                <a href="/<%= article.slug %>" class="btn btn-success">Ler artigo</a>
+            </div>
+        </div>
         <% }); %>
     </div>
 </body>
