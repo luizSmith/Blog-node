@@ -117,4 +117,33 @@ router.post("/articles/update", (req, resp) => {
     }
 });
 
+router.get("/articles/page/:num?", (req, resp) => {
+    var page = req.params.num;
+    var offset = 0;
+
+    if (!isNaN(page) && page > 0) {
+        page -= 1;
+        offset = parseInt(page) * 4;
+    }
+
+    Article.findAndCountAll({
+        limit: 4,
+        offset: offset
+    }).then(articles => {
+
+        var result = {
+            articles: articles,
+            finalPage: Math.ceil(articles.count / 4) // arredonda para cima
+        }
+
+        Category.findAll().then(categories => {
+            resp.render("admin/articles/page",{
+                categories:categories,
+                result:result
+            });            
+        })
+    })
+
+})
+
 module.exports = router;
