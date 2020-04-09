@@ -1,0 +1,44 @@
+<%- include("../../partials/header.ejs") %>
+<body>
+<%- include("../../partials/navbar.ejs") %>
+    <div class="container">
+        <hr>
+        <h2 class="mb-3">Usuarios</h2>
+        <a class="btn btn-success mb-3" href="/admin/users/create">Criar Usuario</a>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.email %></td>
+                    <td>
+                        <a class="btn btn-warning" href="/admin/users/edit/<%= user.id %>">Editar</a>
+                        <form id="deletar" method="POST" action="/users/delete" style="display: inline;">
+                            <input type="hidden" name="id" value="<%= user.id %>">
+                            <button type="submit" class="btn btn-danger">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+<%- include("../../partials/footer.ejs") %>
+<script>
+    $("#deletar").submit(function(e) {    
+        
+        var confirma = confirm("Você realmente deseja apagar este usuario ?");
+        
+        if (!confirma) {
+            e.preventDefault();
+        }
+    })
+</script>

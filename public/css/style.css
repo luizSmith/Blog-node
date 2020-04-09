@@ -5,3 +5,7 @@
     color: white;
     border-radius: 0px;
 }
+
+#alerta{
+    display: none;
+}

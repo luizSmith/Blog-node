@@ -1,0 +1,37 @@
+<%- include("../../partials/header.ejs") %>
+<body>
+    <%- include("../../partials/navbar.ejs") %>
+    <div class="container">
+        <hr>
+        <div class="card">
+            <div class="card-header">
+                <h2>Edição de Usuario</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/users/update">
+                    <div id="alerta" class="alert alert-danger" role="alert"></div>
+                    
+                    <input type="hidden" name="id" value="<%= user.id %>">
+                    <input type="email" class="form-control mb-3" value="<%= user.email %>" name="email" placeholder="email@provedor.com.br">
+                    
+                    <label>Senha</label>
+                    <input type="password" class="form-control mb-2" id="password" name="password" placeholder="Nova senha">
+                    <input type="password" class="form-control mb-3" id="password2" placeholder="Confirma">
+                    <button class="btn btn-success">Editar</button>
+                    <a href="/admin/users" class="btn btn-danger">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<%- include("../../partials/footer.ejs") %>
+<script>
+    $("form").submit(function(e) {    
+        
+        if ($("#password").val() != $("#password2").val()) {
+            alertaErro("Senha não confere !!!")
+            e.preventDefault();
+        }
+
+    });    
+</script>
