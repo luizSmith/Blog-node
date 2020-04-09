@@ -43,16 +43,20 @@ app.use('/',articlesController);
 
 app.get('/', (req, resp) => {
 
-    Article.findAll({
-        order:[
-            ['id','DESC']
+    Article.findAndCountAll({
+        limit: 4,
+        offset: 0,
+        order: [
+            ['id','desc']
         ]
     }).then(articles => {
         Category.findAll().then(categories => {
+
             resp.render("index",{
                 articles:articles,
                 categories:categories
             });
+
         })        
     });
     
