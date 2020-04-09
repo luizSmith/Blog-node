@@ -2,12 +2,18 @@
 <body>
 <%- include("../../partials/navbar.ejs") %>
     <div class="container">
+        
         <div class="card mt-5">
             <div class="card-header">
                 <h3>Criação de usuario</h3>
             </div>
             <div class="card-body">
                 <form method="POST" action="/user/create">
+                    <% if (typeof erro != 'undefined') { %>
+                        <div class="alert alert-danger" role="alert">
+                            <%= email + erro %>
+                        </div>
+                    <% } %>
                     <p>
                         <input type="email" class="form-control" name="email" placeholder="email@provedor.com.br">
                     </p>

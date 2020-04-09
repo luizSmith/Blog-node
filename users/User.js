@@ -4,7 +4,8 @@ const connection = require("../database/database");
 const User = connection.define('tb_users',{
     email:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true,
     },
     password: {
         type: Sequelize.STRING,
@@ -13,9 +14,9 @@ const User = connection.define('tb_users',{
 })
 
 // User.sync({ //sincroniza o banco
-//     force: false //só recria a tabela se ela não existir
+//     force: true //só recria a tabela se ela não existir
 // }).then(() => {
-//     console.log("Tabela Category sincronizada");
+//     console.log("Tabela User sincronizada");
 // })
 
 module.exports = User;

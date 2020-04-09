@@ -7,6 +7,11 @@
         <p class="lead">Procure novos artigos</p>
     </div>
     <div class="container">
+        <% if (typeof erro != 'undefined') { %>
+            <div class="alert alert-danger" role="alert">
+                <%= erro %>
+            </div>
+        <% } %>
 
         <% articles.rows.forEach(article => { %>
         <div class="card mb-4">
