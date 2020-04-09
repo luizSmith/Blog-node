@@ -6,6 +6,7 @@ const connection = require("./database/database");
 //importando controllers
 const categoriesController = require('./categories/CategoriesContoller');
 const articlesController = require('./articles/ArticlesContoller');
+const usersController = require('./users/UsersController');
 
 
 //view engine
@@ -22,6 +23,7 @@ app.use(bodyParset.json());
 //Model
 const Article = require('./articles/Article');
 const Category = require('./categories/Category');
+const User = require('./users/User');
 
 //database
 
@@ -40,6 +42,8 @@ app.use("/",categoriesController);
 
 //chamando rota da controller articles
 app.use('/',articlesController);
+
+app.use('/',usersController);
 
 app.get('/', (req, resp) => {
 
