@@ -131,7 +131,7 @@ router.post('/autenticate', (req, resp) => {
                     email: user.email
                 }
 
-                resp.json(req.session.user);
+                resp.redirect("/admin/categories");
             } else {
                 resp.render("admin/users/login",{
                     error: "Email ou senha incorretos"
@@ -148,6 +148,11 @@ router.post('/autenticate', (req, resp) => {
         });
         console.log(erro);
     })
+});
+
+router.get("/logout", (req, resp) => {
+    req.session.user = undefined;
+    resp.redirect("/");
 })
 
 module.exports = router;
