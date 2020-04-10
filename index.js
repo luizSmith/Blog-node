@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParset = require('body-parser');
+const session = require("express-session");
 const connection = require("./database/database");
 
 //importando controllers
@@ -8,10 +9,17 @@ const categoriesController = require('./categories/CategoriesContoller');
 const articlesController = require('./articles/ArticlesContoller');
 const usersController = require('./users/UsersController');
 
-
 //view engine
 app.set('view engine', 'ejs');
 
+
+//session
+app.use(session({
+    secret: "novaera", //hash se segurança
+    cookie: {
+        maxAge: 36000 //tempo do cookie de 30seg
+    }
+}))
 
 //arquivo estratico
 app.use(express.static('public'));
