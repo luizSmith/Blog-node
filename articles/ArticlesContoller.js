@@ -5,8 +5,10 @@ const Category = require("../categories/Category");
 const Article = require("./Article");
 const slugify = require("slugify");
 
+const adminAuth = require("../middlewares/adminAuth");
+
 //objeto utilizado para criar as rotas
-router.get('/admin/articles', (req, resp) => {
+router.get('/admin/articles', adminAuth ,(req, resp) => {
     Article.findAll({
         include: [{model: Category}],
         raw:true,
@@ -20,7 +22,7 @@ router.get('/admin/articles', (req, resp) => {
     });
 });
 
-router.get('/admin/articles/new', (req,resp) => {
+router.get('/admin/articles/new', adminAuth ,(req,resp) => {
     Category.findAll({
         raw:true
     }).then(categories => {
@@ -31,7 +33,7 @@ router.get('/admin/articles/new', (req,resp) => {
 });
 
 
-router.post('/articles/save',(req,resp) => {
+router.post('/articles/save', adminAuth ,(req,resp) => {
     var title = req.body.title;
     var category = req.body.category;
     var body = req.body.body;
@@ -50,7 +52,7 @@ router.post('/articles/save',(req,resp) => {
     }
 });
 
-router.post('/articles/delete', (req,resp) => {
+router.post('/articles/delete', adminAuth ,(req,resp) => {
     var id = req.body.id;
 
     if (id != undefined && !isNaN(id)) {
@@ -67,7 +69,7 @@ router.post('/articles/delete', (req,resp) => {
     }
 });
 
-router.get('/admin/articles/edit/:id', (req,resp) => {
+router.get('/admin/articles/edit/:id', adminAuth ,(req,resp) => {
     var id = req.params.id;
 
     if (id != undefined && !isNaN(id)) {
@@ -93,7 +95,7 @@ router.get('/admin/articles/edit/:id', (req,resp) => {
 
 });
 
-router.post("/articles/update", (req, resp) => {
+router.post("/articles/update", adminAuth ,(req, resp) => {
     var id = req.body.id;
     var title = req.body.title;
     var category = req.body.category;

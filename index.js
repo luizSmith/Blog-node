@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(session({
     secret: "novaera", //hash se segurança
     cookie: {
-        maxAge: 36000 //tempo do cookie de 30seg
+        maxAge: 360000 //tempo do cookie de 30seg
     }
 }))
 

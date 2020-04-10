@@ -3,7 +3,9 @@ const router = express.Router();
 const User = require("./User");
 const bcrypt = require('bcryptjs');
 
-router.get('/admin/users', (req, resp) => {
+const adminAuth = require('../middlewares/adminAuth');
+
+router.get('/admin/users', adminAuth ,(req, resp) => {
     User.findAll().then(users => {
         resp.render("admin/users/index",{
             users:users
@@ -49,7 +51,7 @@ router.post('/user/create',(req,resp) => {
     })
 });
 
-router.get("/admin/users/edit/:id", (req,resp) => {
+router.get("/admin/users/edit/:id", adminAuth ,(req,resp) => {
     var id = req.params.id;
 
     if (id != undefined && !isNaN(id)) {
@@ -65,7 +67,7 @@ router.get("/admin/users/edit/:id", (req,resp) => {
     }
 });
 
-router.post('/users/update', (req, resp) => {
+router.post('/users/update', adminAuth ,(req, resp) => {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
@@ -90,7 +92,7 @@ router.post('/users/update', (req, resp) => {
     }
 });
 
-router.post('/users/delete', (req,resp) => {
+router.post('/users/delete', adminAuth ,(req,resp) => {
     var id = req.body.id;
 
     if (id != undefined && !isNaN(id)) { 
