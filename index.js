@@ -146,6 +146,10 @@ app.get('/category/:slug/:num?',(req, resp) => {
     })
 });
 
+app.use(function (req, resp, next) {
+    resp.status(404).render("notFound");
+})
+
 app.listen(8080, () => {
     console.log("servidor rodando");
 });
