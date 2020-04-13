@@ -15,11 +15,28 @@
     background-image: url('/img/header_artigos_18_1600x900.jpg');
     background-size:cover;
     background-repeat: no-repeat;
+    height: 90vh;
+}
+
+#login .container{
+    height: calc(90vh - 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .card_login{
-    margin: 15% 25% 15% 25% !important;
+    width: 50%;
 }
+
+@media (max-width: 800px){
+    .card_login{
+        width: 90% !important;
+    }
+}
+
 .form_login{
     text-align: center;
 }
