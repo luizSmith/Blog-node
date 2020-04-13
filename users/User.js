@@ -13,10 +13,10 @@ const User = connection.define('tb_users',{
     }
 })
 
-// User.sync({ //sincroniza o banco
-//     force: true //só recria a tabela se ela não existir
-// }).then(() => {
-//     console.log("Tabela User sincronizada");
-// })
+User.sync({ //sincroniza o banco
+    force: false //só recria a tabela se ela não existir
+}).then(() => {
+    console.log("Tabela User sincronizada");
+})
 
 module.exports = User;

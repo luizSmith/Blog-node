@@ -12,10 +12,10 @@ const Category = connection.define('tb_categories',{
     }
 })
 
-// Category.sync({ //sincroniza o banco
-//     force: false //só recria a tabela se ela não existir
-// }).then(() => {
-//     console.log("Tabela Category sincronizada");
-// })
+Category.sync({ //sincroniza o banco
+    force: false //só recria a tabela se ela não existir
+}).then(() => {
+    console.log("Tabela Category sincronizada");
+})
 
 module.exports = Category;
