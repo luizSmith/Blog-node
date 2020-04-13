@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 
 const adminAuth = require('../middlewares/adminAuth');
 
+const notLog = require('../middlewares/notLog');
+
 router.get('/admin/users', adminAuth ,(req, resp) => {
     User.findAll().then(users => {
         resp.render("admin/users/index",{
@@ -16,11 +18,11 @@ router.get('/admin/users', adminAuth ,(req, resp) => {
     });
 });
 
-router.get('/admin/users/create', (req, resp) => {
+router.get('/admin/users/create', notLog ,(req, resp) => {
     resp.render("admin/users/create");
 });
 
-router.post('/user/create',(req,resp) => {
+router.post('/user/create', notLog ,(req,resp) => {
     var email = req.body.email;
     var password = req.body.password;
 
@@ -108,7 +110,7 @@ router.post('/users/delete', adminAuth ,(req,resp) => {
     }
 });
 
-router.get("/login", (req, resp) => {
+router.get("/login", notLog ,(req, resp) => {
     resp.render("admin/users/login");
 });
 
