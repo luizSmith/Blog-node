@@ -96,23 +96,45 @@ app.get('/:slug',(req, resp) => {
     })
 });
 
-app.get('/category/:slug',(req, resp) => {
+app.get('/category/:slug/:num?',(req, resp) => {
+    var page = req.params.num;
+    var offset = 0;
     var slug = req.params.slug;
-    Category.findOne({
-        where:{
-            slug:slug
-        },
+
+    if (!isNaN(page) && page > 0) {
+        offset = parseInt(page -1) * 4;
+    } else {
+        page = 1;
+    }
+    
+    Article.findAndCountAll({
         include: [{
-            model: Article
-        }]
-    }).then(category => {
-        if (category != undefined) {
+            model: Category,
+            where:{
+                slug:slug
+            }
+        }],
+        limit: 4,
+        offset: offset,
+        order: [
+            ['id','desc']
+        ]    
+    }).then(articles => {
+        if (articles != undefined) {
+
+            var result = {
+                articles: articles,
+                finalPage: Math.ceil(articles.count / 4) // arredonda para cima
+            }
 
             Category.findAll().then(categories => {
-                resp.render("index",{
+                resp.render("admin/categories/articlePage",{
                     
-                    articles:category.tb_articles,
-                    categories:categories //nav bar
+                    categories:categories,
+                    result:result,
+                    page: parseInt(page),
+                    slug:slug
+
                 })
             })
             

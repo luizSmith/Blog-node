@@ -1,0 +1,44 @@
+<%- include("../../partials/header.ejs") %>
+
+<body>
+    <%- include("../../partials/homenavbar.ejs") %>
+    <div class="jumbotron">
+        <h3 class="display-4">Bem vindo</h3>
+        <p class="lead">Procure novos artigos</p>
+    </div>
+    <div class="container">
+        <% if (typeof erro != 'undefined') { %>
+            <div class="alert alert-danger" role="alert">
+                <%= erro %>
+            </div>
+        <% } %>
+
+        <% result.articles.rows.forEach(article => { %>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3><%= article.title %></h3>
+            </div>
+            <div class="card-body">
+                <a href="/<%= article.slug %>" class="btn btn-success">Ler artigo</a>
+            </div>
+        </div>
+        <% }); %>
+
+        <% if (result.articles.count > 4) { %>
+        <div class="row mb-4">
+            <div class="col col-12">
+                <% if (page > 2) { %>
+                    <a class="btn btn-primary" style="float:left;" href="/category/<%= slug %>/<%= page - 1 %>"> <<< Prev</a>
+                <% } else if (page == 2) { %>
+                    <a class="btn btn-primary" style="float:left;" href="/category/<%= slug %>/"> <<< Prev</a>
+                <% } %>
+                
+                <% if (page < result.finalPage) { %>
+                    <a class="btn btn-primary" style="float:right;" href="/category/<%= slug %>/<%= page + 1 %>">Next >>></a>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</body>
+<%- include("../../partials/footer.ejs") %>
