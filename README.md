@@ -1,4 +1,4 @@
-# Projeto visando melhorar minhas habilidades com node
+# Projeto visando melhorar minhas habilidades com Node.js
 
 ## Tecnologias;
 
