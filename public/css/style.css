@@ -1,5 +1,6 @@
 body {
     background-color: #FAFAFA !important;
+    min-width: 600px !important;
 }
 
 .card-header {
@@ -12,6 +13,7 @@ body {
     background-repeat: no-repeat;
     color: white;
     border-radius: 0px;
+    padding: 4rem 2rem !important;
 }
 
 #alerta{
@@ -39,9 +41,12 @@ body {
     width: 50%;
 }
 
-@media (max-width: 800px){
+@media (max-width: 600px) {
     .card_login{
         width: 90% !important;
+    }
+    .jumbotron {
+        text-align: center;
     }
 }
 
